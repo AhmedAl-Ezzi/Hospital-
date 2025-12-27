@@ -1,0 +1,111 @@
+@extends('dashboard.layouts.master')
+
+@section('content')
+    <main role="main" class="main-content">
+
+        <style>
+            /* ===== Fix Layout ===== */
+            .chat-wrapper {
+                height: calc(100vh - 200px);
+                overflow: hidden;
+            }
+
+            /* ===== Users ===== */
+            .chat-users {
+                height: 100%;
+                overflow-y: auto;
+                border-left: 1px solid #eee;
+                background: #fff;
+            }
+
+            .chat-user {
+                cursor: pointer;
+                transition: .2s;
+            }
+
+            .chat-user:hover,
+            .chat-user.active {
+                background: #f1f5ff;
+            }
+
+            .chat-user img {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+            }
+
+            /* ===== Messages ===== */
+            .chat-messages {
+                flex: 1;
+                overflow-y: auto;
+                padding: 20px;
+                background: #f8f9fa;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* ===== Message bubble ===== */
+            .msg {
+                max-width: 70%;
+                padding: 12px 16px;
+                border-radius: 14px;
+                margin-bottom: 10px;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            /* المرسل */
+            .msg.me {
+                background: #4f46e5;
+                color: #fff;
+                align-self: flex-start;
+                border-bottom-right-radius: 4px;
+            }
+
+            /* المستقبل */
+            .msg.other {
+                background: #fff;
+                border: 1px solid #ddd;
+                color: #333;
+                align-self: flex-end;
+                border-bottom-left-radius: 4px;
+            }
+
+            /* ===== Footer ===== */
+            .chat-footer {
+                border-top: 1px solid #ddd;
+                padding: 10px;
+                background: #fff;
+            }
+
+            .chat-footer input {
+                border-radius: 20px;
+            }
+        </style>
+
+        <div class="row chat-wrapper">
+
+            <!-- Users -->
+            <div class="col-lg-4 col-md-5 h-100">
+                <div class="card h-100">
+                    @livewire('chats.chat-list')
+                </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="col-lg-8 col-md-7 h-100">
+                <div class="card h-100 d-flex flex-column">
+
+                    {{-- Inbox --}}
+                    @livewire('chats.chat-box')
+
+                    {{-- Send Message --}}
+                    @livewire('chats.send-message')
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+@endsection
