@@ -10,7 +10,7 @@
                 </button>
             </div>
 
-            <form action="{{ route('doctors.update', $doctor->id) }}" method="POST"  enctype="multipart/form-data">
+            <form action="{{ route('doctors.update', $doctor->id) }}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="{{ $doctor->id }}">
                 @csrf
                 @method('PATCH')
@@ -61,6 +61,29 @@
                         </div>
 
 
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>عدد الكشوفات اليومية</label>
+
+                                <input  name="number_of_statements" value="{{ $doctor->number_of_statements }}" type="text" class="form-control"
+                                    value="{{ $doctor->number_of_statements }}" type="text">
+
+                            </div>
+                        </div>
+
+
+                        {{-- <div class="row row-xs align-items-center mg-b-20">
+                            <div class="col-md-1">
+                                <label for="exampleInputEmail1">عدد الكشوفات اليومية</label>
+                            </div>
+                            <div class="col-md-11 mg-t-5 mg-md-t-0">
+                                <input class="form-control" name="number_of_statements"
+                                    value="{{ $doctor->number_of_statements }}" type="text">
+                            </div>
+                        </div> --}}
+
+
+
                         {{-- المواعيد --}}
                         <div class="col-md-12 mt-3">
                             <label class="font-weight-bold">المواعيد المتاحة</label>
@@ -89,14 +112,14 @@
                         </div>
 
 
-                          {{-- الصورة --}}
+                        {{-- الصورة --}}
                         <div class="col-md-6 mb-3">
                             <label>صورة الطبيب</label>
                             <input type="file" name="photo" class="form-control-file">
                             <img src="{{ $doctor->image
                                 ? asset('dashboard/assets/img/doctors/' . $doctor->image->filename)
                                 : asset('dashboard/assets/img/default-avatar.jpg') }}"
-                                 height="80" class="mt-2 rounded">
+                                height="80" class="mt-2 rounded">
                         </div>
 
                         {{-- الحالة --}}

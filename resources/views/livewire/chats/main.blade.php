@@ -81,6 +81,124 @@
             .chat-footer input {
                 border-radius: 20px;
             }
+
+
+
+            /* يجعل الكارد كله بطول السيدر */
+            .chat-users-wrapper,
+            .card.h-100 {
+                height: 100%;
+            }
+
+            /* الهيدر (البحث) يبقى ثابت */
+            .card-header {
+                flex-shrink: 0;
+            }
+
+            /* قائمة المحادثات */
+            .chat-users {
+                height: calc(100vh - 260px);
+                /* عدل الرقم حسب الهيدر والفوتر */
+                overflow-y: auto;
+            }
+
+            /* تحسين شكل السكرول */
+            .chat-users::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .chat-users::-webkit-scrollbar-thumb {
+                background-color: #d1d5db;
+                border-radius: 10px;
+            }
+
+
+
+
+
+
+
+            /* نضمن أن .card.h-100 يعرض محتواه بشكل عمودي ويملأ الارتفاع */
+            .card.h-100 {
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* نضمن أن .d-flex.flex-column.flex-fill يأخذ المساحة المتبقية */
+            .d-flex.flex-column.flex-fill {
+                flex: 1;
+                overflow: hidden;
+                /* حتى نمنع أي تجاوز */
+            }
+
+            /* ثم نحدد أن .chat-messages يأخذ كل المساحة المتبقية ويمكن التمرير */
+            .chat-messages {
+                flex: 1;
+                overflow-y: auto;
+                min-height: 0;
+                /* مهم لتفعيل التمرير في بيئة flex */
+            }
+
+
+
+
+
+
+
+            /* إضافة إلى قسم الـ style */
+            .unread-badge {
+                font-size: 10px;
+                padding: 3px 6px;
+                min-width: 18px;
+                height: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .list-group-item .badge-primary {
+                background-color: #4f46e5;
+                color: white;
+                border-radius: 10px;
+                padding: 4px 8px;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+            /* تحسين ظهور العداد على الصورة */
+            .position-relative {
+                position: relative;
+            }
+
+            .position-absolute {
+                position: absolute;
+            }
+
+            .top-0 {
+                top: 0;
+            }
+
+            .start-100 {
+                left: 100%;
+            }
+
+            .translate-middle {
+                transform: translate(-50%, -50%);
+            }
+
+            /* تنسيق النصوص في قائمة المحادثات */
+            .text-truncate {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            /* تحسين مظهر العنصر النشط */
+            .list-group-item.active {
+                background-color: #f1f5ff !important;
+                border-color: #dee2e6 !important;
+                color: #000 !important;
+            }
         </style>
 
         <div class="row chat-wrapper">

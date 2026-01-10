@@ -109,56 +109,6 @@ class CreateGroupServices extends Component
 
 
 
-    // public function saveGroup()
-    // {
-
-
-
-
-    //     $Groups = new Group();
-    //     $total = 0;
-
-    //     foreach ($this->GroupsItems as $groupItem) {
-    //         if ($groupItem['is_saved'] && $groupItem['service_price'] && $groupItem['quantity']) {
-    //             $total += $groupItem['service_price'] * $groupItem['quantity'];
-    //         }
-    //     }
-
-    //     // اضبط جميع القيم قبل عملية الحفظ
-    //     $Groups->name = $this->name_group;
-    //     $Groups->notes = $this->notes;
-
-    //     $Groups->total_before_discount = $total;
-    //     $Groups->discount_value = $this->discount_value;
-    //     $Groups->total_after_discount = $total - (is_numeric($this->discount_value) ? $this->discount_value : 0);
-    //     $Groups->tax_rate = $this->taxes;
-    //     $Groups->total_with_tax = $Groups->total_after_discount * (1 + (is_numeric($this->taxes) ? $this->taxes : 0) / 100);
-
-    //     $Groups->save(); // ✔️ الآن الحفظ صحيح ولا يوجد خطأ
-
-    //     // // حفظ العلاقة
-    //     // foreach ($this->GroupsItems as $GroupsItem) {
-    //     //     $Groups->service_group()->attach($GroupsItem['service_id']);
-    //     // }
-
-    //      // حفظ العلاقة
-    //         foreach ($this->GroupsItems as $GroupsItem) {
-    //             $Groups->service_group()->attach($GroupsItem['service_id'],['quantity' => $GroupsItem['quantity']]);
-    //         }
-
-    //     flash()->success('تم حفظ البيانات بنجاح');
-
-    //     $this->reset('GroupsItems', 'name_group', 'notes');
-    //     $this->discount_value = 0;
-    //     $this->serviceSaved = true;
-
-
-
-    // }
-
-
-
-
 
     public function saveGroup()
     {

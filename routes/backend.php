@@ -2,6 +2,7 @@
 
 use App\Events\MyEvent;
 use App\Http\Controllers\Dashboard\AmbulanceController;
+use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\IndexController;
@@ -27,9 +28,9 @@ Route::get('/', [DashboardController::class, 'index']);
 
 
 //################################ dashboard user ##########################################
-// Route::get('/dashboard/user', function () {
-//     return view('dashboard.user.dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard.user');
+Route::get('/dashboard/user', function () {
+    return view('dashboard.user.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard.user');
 
 //################################ end dashboard user #####################################
 
@@ -42,7 +43,7 @@ Route::get('/', [DashboardController::class, 'index']);
 // })->middleware(['auth:admin', 'verified'])->name('dashboard.admin');
 
 
-    Route::get('/dashboard', [IndexController::class, 'index'])->name('dashboard.admin')
+Route::get('/dashboard', [IndexController::class, 'index'])->name('dashboard.admin')
     ->middleware(['auth:admin', 'verified']);
 
 
@@ -122,16 +123,27 @@ Route::middleware(['auth:admin'])->group(function () {
     // ->name('notifications.fetch');
 
 
+    //############################# appointments route ##########################################
 
-    // في routes/web.php
-Route::get('/notifications/fetch', [NotificationController::class, 'fetch'])
-    ->name('notifications.fetch');
+    Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('appointments/approval', [AppointmentController::class, 'index2'])->name('appointments.index2');
+    Route::get('appointments/finsh', [AppointmentController::class, 'finsh'])->name('appointments.finsh');
+    Route::put('appointments/approval/{id}', [AppointmentController::class, 'approval'])->name('appointments.approval');
+    Route::delete('appointments/approval/{id}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 
 
-Route::post('/notifications/mark-as-read', [NotificationController::class, 'markAsRead'])
-    ->name('notifications.markAsRead');
 
 
+
+
+
+
+    // Route::get('/notifications/fetch', [NotificationController::class, 'fetch'])
+    //     ->name('notifications.fetch');
+
+
+    // Route::post('/notifications/mark-as-read', [NotificationController::class, 'markAsRead'])
+    //     ->name('notifications.markAsRead');
 });
 
 

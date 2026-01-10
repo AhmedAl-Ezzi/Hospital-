@@ -21,7 +21,7 @@
         <li class="nav-item nav-notif">
             <a class="nav-link text-muted my-2" href="#" data-toggle="modal" data-target="#notificationsModal">
                 <i class="fe fe-bell fe-16"></i>
-                <span id="notif-count" class="badge badge-danger"
+                <span id="notif-count" class="badge badge-success"
                     style="position:absolute; top:10px; right:8px;">0</span>
             </a>
         </li>

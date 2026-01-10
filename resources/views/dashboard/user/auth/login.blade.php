@@ -509,8 +509,8 @@
                     let colors = {
                         'user': 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)',
                         'admin': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        'doctor': 'linear-gradient(135deg, #FF9800 0%, #F57C00 100%)',
-                        'ray_employee': 'linear-gradient(135deg, #00BCD4 0%, #0097A7 100%)'
+                        'doctor':'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        'ray_employee': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
                     };
 
                     $('#' + target + ' .btn-login').css('background', colors[target]);

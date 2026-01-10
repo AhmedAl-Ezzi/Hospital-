@@ -27,34 +27,6 @@ class DoctorRepository implements DoctorsRepositoryInterface
         return view('dashboard.admin.doctors.index', compact('doctors', 'sections', 'appointments'));
     }
 
-    // public function store($request)
-    // {
-    //     DB::beginTransaction();
-    //     try {
-
-    //         $doctors = new Doctor();
-    //         $doctors->name = $request->name;
-    //         $doctors->email = $request->email;
-    //         $doctors->password = Hash::make($request->password);
-    //         $doctors->section_id = $request->section_id;
-    //         // $doctors->appointments = implode(",", $request->appointments);
-    //         $doctors->phone = $request->phone;
-    //         $doctors->status = 1;
-    //         $doctors->save();
-
-    //         //Upload img
-    //         $this->verifyAndStoreImage($request, 'photo', 'doctors', 'upload_image', $doctors->id, 'App\Models\Doctor');
-
-    //         DB::commit();
-    //         session()->flash('add');
-    //         return redirect()->route('doctors.index');
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-    //     }
-    // }
-
-
 
     public function store($request)
     {
@@ -77,7 +49,6 @@ class DoctorRepository implements DoctorsRepositoryInterface
             $this->verifyAndStoreImage($request, 'photo', 'doctors', 'upload_image', $doctors->id, 'App\Models\Doctor');
 
             DB::commit();
-            // session()->flash('add');
             flash()->success('تم اضافة الطبيب بنجاح.');
             return redirect()->route('doctors.index');
         } catch (\Exception $e) {
@@ -85,51 +56,6 @@ class DoctorRepository implements DoctorsRepositoryInterface
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-
-
-
-    // public function update(Request $request)
-    // {
-
-    //     DB::beginTransaction();
-
-    //     try {
-
-    //         $doctor = Doctor::findorfail($request->id);
-
-    //         $doctor->name = $request->name;
-    //         $doctor->email = $request->email;
-    //         $doctor->section_id = $request->section_id;
-    //         $doctor->phone = $request->phone;
-    //         $doctor->save();
-    //         // store trans
-    //         // $doctor->name = $request->name;
-    //         // dd($doctor);
-    //         // $doctor->save();
-
-    //         // update pivot tABLE
-    //         $doctor->doctorappointments()->sync($request->appointments);
-
-    //         // update photo
-    //         if ($request->has('photo')) {
-    //             // Delete old photo
-    //             if ($doctor->image) {
-    //                 $old_img = $doctor->image->filename;
-    //                 $this->Delete_attachment('upload_image', 'doctors/' . $old_img, $request->id);
-    //             }
-    //             //Upload img
-    //             $this->verifyAndStoreImage($request, 'photo', 'doctors', 'upload_image', $request->id, 'App\Models\Doctor');
-    //         }
-
-    //         DB::commit();
-    //         session()->flash('edit');
-    //         return redirect()->back();
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-    //     }
-    // }
 
 
 
@@ -143,6 +69,7 @@ class DoctorRepository implements DoctorsRepositoryInterface
         $doctor->email = $request->email;
         $doctor->section_id = $request->section_id;
         $doctor->phone = $request->phone;
+        $doctor->number_of_statements = $request->number_of_statements;
         $doctor->save();
 
         // Sync appointments

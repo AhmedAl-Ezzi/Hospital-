@@ -15,12 +15,13 @@ return new class extends Migration
 
             $table->id();
             $table->integer('user_id');
-            // $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('doctor_id');
             $table->string('message');
             $table->string('description')->nullable();
             $table->boolean('is_read')->default(0);
             $table->tinyInteger('reader_status')->default(0); // 0 = غير مقروء, 1 = مقروء
             $table->timestamps();
+            // $table->foreignId('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
 
             // $table->id();
             // $table->unsignedBigInteger('user_id');

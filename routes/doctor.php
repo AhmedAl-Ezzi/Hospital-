@@ -7,6 +7,8 @@ use App\Http\Controllers\Dashboard_Doctor\LaboratorieController;
 use App\Http\Controllers\Dashboard_Doctor\NotificationAController;
 use App\Http\Controllers\Dashboard_Doctor\PatientDetailController;
 use App\Http\Controllers\Dashboard_Doctor\RayController;
+use App\Livewire\Chats\CreateChat;
+use App\Livewire\Chats\Main;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-    Route::get('/dashboard', [IndexController::class, 'index'])->name('dashboard.doctor')
+Route::get('/dashboard', [IndexController::class, 'index'])->name('dashboard.doctor')
     ->middleware(['auth:doctor', 'verified']);
 
 
@@ -61,10 +63,9 @@ Route::middleware(['auth:doctor'])->group(function () {
     // Route::get('show_laboratorie/{id}', [InvoiceController::class, 'showLaboratorie'])->name('show.laboratorie');
 
 
-
-
-
-
+    //############################# Chat route ##########################################
+    Route::get('list/patient', CreateChat::class)->name('list.patient');
+    Route::get('list/chat/patient', Main::class)->name('chat.patient');
 });
 
 

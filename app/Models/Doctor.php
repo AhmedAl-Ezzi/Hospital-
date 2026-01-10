@@ -11,7 +11,17 @@ class Doctor extends Authenticatable
 {
     use HasFactory;
 
-    public $fillable = ['email', 'email_verified_at', 'password', 'phone', 'name', 'appointments', 'section_id','status'];
+    public $fillable = [
+        'email',
+        'email_verified_at',
+        'password',
+        'phone',
+        'name',
+        'appointments',
+        'section_id',
+        'status',
+        'number_of_statements',
+    ];
 
 
     public function image()
@@ -29,5 +39,4 @@ class Doctor extends Authenticatable
     {
         return $this->belongsToMany(Appointment::class);
     }
-
 }

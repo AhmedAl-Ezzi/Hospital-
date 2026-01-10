@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Events\MyEvent;
+use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\FundAccount;
 use App\Models\Invoice;
@@ -39,21 +40,6 @@ class SingleInvoices extends Component
         ]);
     }
 
-    // public function print($id)
-    // {
-    //     $single_invoice = SingleInvoice::findorfail($id);
-    //     return Redirect::route('Print_single_invoices', [
-    //         'invoice_date' => $single_invoice->invoice_date,
-    //         'doctor_id' => $single_invoice->Doctor->name,
-    //         'section_id' => $single_invoice->Section->name,
-    //         'Service_id' => $single_invoice->Service->name,
-    //         'type' => $single_invoice->type,
-    //         'price' => $single_invoice->price,
-    //         'discount_value' => $single_invoice->discount_value,
-    //         'tax_rate' => $single_invoice->tax_rate,
-    //         'total_with_tax' => $single_invoice->total_with_tax,
-    //     ]);
-    // }
 
 
     public function print($id)
@@ -77,21 +63,6 @@ class SingleInvoices extends Component
         $this->show_table = false;
     }
 
-
-    // public function get_section()
-    // {
-    //     // $doctor_id = Doctor::with('section')->where('id', $this->doctor_id)->first();
-    //     // $this->section_id = $doctor_id->section->name;
-
-    //     $doctor = Doctor::with('section')->where('id', $this->doctor_id)->first();
-    //     if ($doctor && $doctor->section) {
-    //         $this->section_id = $doctor->section->id; // Store the ID, not the name
-    //     } else {
-    //         $this->section_id = null;
-    //     }
-    // }
-
-
     public function get_section()
     {
         $doctor = Doctor::with('section')->find($this->doctor_id);
@@ -110,29 +81,6 @@ class SingleInvoices extends Component
     {
         $this->price = Service::where('id', $this->Service_id)->first()->price;
     }
-
-
-    //      public function store(){
-
-    //         $single_invoices = new SingleInvoice();
-    //         $single_invoices->invoice_date = date('Y-m-d');
-    //         $single_invoices->patient_id = $this->patient_id;
-    //         $single_invoices->doctor_id = $this->doctor_id;
-    //         // $single_invoices->section_id = DB::table('sections')->where('name', $this->section_id)->first()->section_id;
-    // $single_invoices->section_id = $this->section_id; // This is now the ID
-    //         $single_invoices->Service_id = $this->Service_id;
-    //         $single_invoices->price = $this->price;
-    //         $single_invoices->discount_value = $this->discount_value;
-    //         $single_invoices->tax_rate = $this->tax_rate;
-    //         // قيمة الضريبة = السعر - الخصم * نسبة الضريبة /100
-    //         $single_invoices->tax_value = ($this->price -$this->discount_value) * ((is_numeric($this->tax_rate) ? $this->tax_rate : 0) / 100);
-    //         // الاجمالي شامل الضريبة  = السعر - الخصم + قيمة الضريبة
-    //         $single_invoices->total_with_tax = $single_invoices->price -  $single_invoices->discount_value + $single_invoices->tax_value;
-    //         $single_invoices->type = $this->type;
-    //         $single_invoices->save();
-    //         flash()->success('تم اضافة فاتورة بنجاح.');
-    //         $this->show_table =true;
-    //     }
 
 
 
@@ -226,53 +174,48 @@ class SingleInvoices extends Component
                     $fund_accounts->credit = 0.00;
                     $fund_accounts->save();
 
-                    // **إضافة إشعار هنا**
-                    // Notification::create([
-                    //     'doctor_id' => auth()->user()->id,
-                    //     'message' => "تمت إضافة فاتورة نقدية رقم #{$single_invoices->id}",
-                    //     'reader_status' => 0
-                    // ]);
+
+
+                    // chek appointment
+                    $patient = Patient::find($this->patient_id);
+                    $appointment_info = Appointment::where('doctor_id', $this->doctor_id)->where('email', $patient->email)->where('type', 'مؤكد')->first();
+                    if ($appointment_info) {
+                        $appointment = Appointment::find($appointment_info->id);
+                        $appointment->update([
+                            'type' => 'منتهي'
+                        ]);
+                    }
 
 
                     // **إضافة إشعار هنا**
                     // $patient = Patient::find($single_invoices->patient_id);
 
                     // Notification::create([
-                    //     'doctor_id' => $single_invoices->doctor_id, // الدكتور صاحب الفاتورة فقط
-                    //     'message'   => 'فاتورة جديدة',
+                    //     // 'doctor_id'   => $single_invoices->doctor_id,
+                    //     'doctor_id' => auth()->user()->id,
+                    //     'message'     => 'فاتورة جديدة',
                     //     'description' => 'اسم المريض: ' . ($patient->name ?? 'غير معروف'),
-                    //     'created_at' => now(),
                     //     'reader_status' => 0
                     // ]);
 
 
 
 
-                    // **إضافة إشعار هنا**
-                    $patient = Patient::find($single_invoices->patient_id);
-
-                    Notification::create([
-                        // 'doctor_id'   => $single_invoices->doctor_id,
-                        'doctor_id' => auth()->user()->id,
-                        'message'     => 'فاتورة جديدة',
-                        'description' => 'اسم المريض: ' . ($patient->name ?? 'غير معروف'),
-                        'reader_status' => 0
-                    ]);
 
 
-            //   $data=[
-            //             'patient_id'=>$this->patient_id,
-            //             'invoice_id'=>$single_invoices->id,
-            //         ];
+                    //   $data=[
+                    //             'patient_id'=>$this->patient_id,
+                    //             'invoice_id'=>$single_invoices->id,
+                    //         ];
 
-                            // event(new MyEvent($data));
+                    // event(new MyEvent($data));
 
 
-//                             event(new MyEvent(
-//     $single_invoices->doctor_id,
-//     $single_invoices->patient_id,
-//     $single_invoices->id
-// ));
+                    //                             event(new MyEvent(
+                    //     $single_invoices->doctor_id,
+                    //     $single_invoices->patient_id,
+                    //     $single_invoices->id
+                    // ));
 
 
 
@@ -364,24 +307,17 @@ class SingleInvoices extends Component
                     $patient_accounts->credit = 0.00;
                     $patient_accounts->save();
 
-                    // Notification::create([
-                    //     'doctor_id' => auth()->user()->id,
-                    //     'message' => "تمت إضافة فاتورة نقدية رقم #{$single_invoices->id}",
-                    //     'reader_status' => 0
-                    // ]);
 
 
-                    // **إضافة إشعار هنا**
-                    // $patient = Patient::find($single_invoices->patient_id);
-
-                    // Notification::create([
-                    //     'doctor_id' => $single_invoices->doctor_id,
-                    //     'message'   => 'فاتورة جديدة',
-                    //     'description' => 'اسم المريض: ' . ($patient->name ?? 'غير معروف'),
-                    //     'created_at' => now(),
-                    //     'reader_status' => 0
-                    // ]);
-
+                    // chek appointment
+                    $patient = Patient::find($this->patient_id);
+                    $appointment_info = Appointment::where('doctor_id', $this->doctor_id)->where('email', $patient->email)->where('type', 'مؤكد')->first();
+                    if ($appointment_info) {
+                        $appointment = Appointment::find($appointment_info->id);
+                        $appointment->update([
+                            'type' => 'منتهي'
+                        ]);
+                    }
 
 
 
@@ -407,12 +343,6 @@ class SingleInvoices extends Component
 
                     flash()->success('تم اضافة فاتورة بنجاح.');
                     $this->show_table = true;
-
-
-
-
-
-
                 }
 
                 DB::commit();

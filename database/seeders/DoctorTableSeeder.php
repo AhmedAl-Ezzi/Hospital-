@@ -19,20 +19,14 @@ class DoctorTableSeeder extends Seeder
 
         Doctor::factory()->count(30)->create();
 
-        
-        //    $doctors =  Doctor::factory()->count(30)->create();
 
-        //    foreach ($doctors as $doctor){
-        //        $Appointments = Appointment::all()->random()->id;
-        //        $doctor->doctorappointments()->attach($Appointments);
-        //     }
 
-            $Appointments = Appointment::all();
+            // $Appointments = Appointment::all();
 
-        Doctor::all()->each(function ($doctor) use ($Appointments) {
-           $doctor->doctorappointments()->attach(
-              $Appointments->random(rand(1,7))->pluck('id')->toArray()
-           );
-       });
+    //     Doctor::all()->each(function ($doctor) use ($Appointments) {
+    //        $doctor->doctorappointments()->attach(
+    //           $Appointments->random(rand(1,7))->pluck('id')->toArray()
+    //        );
+    //    });
     }
 }

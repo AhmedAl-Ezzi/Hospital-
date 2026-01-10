@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Interfaces\Admin_dashboard\Ambulances\AmbulanceRepositoryInterface;
+use App\Interfaces\Admin_dashboard\Appointments\AppointmentRepositoryInterface;
 use App\Interfaces\Doctor_dashboard\Invoice\DiagnosisRepositoryInterface;
 use App\Interfaces\Doctor_dashboard\Invoice\InvoicesRepositoryInterface;
 use App\Interfaces\Admin_dashboard\Doctors\DoctorsRepositoryInterface;
@@ -23,6 +24,7 @@ use App\Interfaces\Patient_dashboard\PatientInvoicesRepositoryInterface;
 use App\Interfaces\RayEmployee_dashboard\RayInvoicesRepositoryInterface;
 use App\Models\Service;
 use App\Repository\Admin_dashboard\Ambulance\AmbulanceRepository;
+use App\Repository\Admin_dashboard\Appointments\AppointmentRepository;
 use App\Repository\Doctor_dashboard\Invoice\DiagnosisRepository;
 use App\Repository\Doctor_dashboard\Invoice\InvoicesRepository;
 use App\Repository\Admin_dashboard\Doctors\DoctorRepository;
@@ -65,6 +67,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RayEmployeeRepositoryInterface::class, RayEmployeeRepository::class);
         $this->app->bind(IndexRepositoryInterface::class, IndexRepository::class);
         $this->app->bind(LaboratorieEmployeeRepositoryInterface::class, LaboratorieEmployeeRepository::class);
+        $this->app->bind(AppointmentRepositoryInterface::class, AppointmentRepository::class);
 
 
 
