@@ -32,7 +32,7 @@
     <ul class="navbar-nav flex-fill w-100 mb-2">
         <li class="nav-item dropdown">
             <a href="#patient-operations" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                <i class="fe fe-box fe-16"></i>
+                <i class="fe fe-file-text fe-16"></i>
                 <span class="ml-3 item-text">عمليات المريض</span>
             </a>
 
@@ -62,7 +62,7 @@
     <ul class="navbar-nav flex-fill w-100 mb-2">
         <li class="nav-item dropdown">
             <a href="#patient-updates" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                <i class="fe fe-bell fe-16"></i>
+                <i class="fe fe-message-square fe-16"></i>
                 <span class="ml-3 item-text">المحدثات</span>
             </a>
 
